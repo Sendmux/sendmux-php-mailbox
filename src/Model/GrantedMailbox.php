@@ -1,7 +1,7 @@
 <?php
 
 /**
- * MailboxMessageContentParticipants
+ * GrantedMailbox
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Sendmux\Mailbox\ObjectSerializer;
 
 /**
- * MailboxMessageContentParticipants Class Doc Comment
+ * GrantedMailbox Class Doc Comment
  *
  * @package  Sendmux\Mailbox
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, JsonSerializable
+class GrantedMailbox implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'MailboxMessageContent_participants';
+    protected static string $openAPIModelName = 'GrantedMailbox';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'bcc' => '\Sendmux\Mailbox\Model\MailboxAddress[]',
-        'cc' => '\Sendmux\Mailbox\Model\MailboxAddress[]',
-        'from' => '\Sendmux\Mailbox\Model\MailboxAddress',
-        'reply_to' => '\Sendmux\Mailbox\Model\MailboxAddress[]',
-        'to' => '\Sendmux\Mailbox\Model\MailboxAddress[]'
+        'email' => 'string',
+        'id' => 'string'
     ];
 
     /**
@@ -72,11 +69,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'bcc' => null,
-        'cc' => null,
-        'from' => null,
-        'reply_to' => null,
-        'to' => null
+        'email' => null,
+        'id' => null
     ];
 
     /**
@@ -85,11 +79,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'bcc' => false,
-        'cc' => false,
-        'from' => true,
-        'reply_to' => false,
-        'to' => false
+        'email' => false,
+        'id' => false
     ];
 
     /**
@@ -168,11 +159,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'bcc' => 'bcc',
-        'cc' => 'cc',
-        'from' => 'from',
-        'reply_to' => 'reply_to',
-        'to' => 'to'
+        'email' => 'email',
+        'id' => 'id'
     ];
 
     /**
@@ -181,11 +169,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      * @var array<string, string>
      */
     protected static array $setters = [
-        'bcc' => 'setBcc',
-        'cc' => 'setCc',
-        'from' => 'setFrom',
-        'reply_to' => 'setReplyTo',
-        'to' => 'setTo'
+        'email' => 'setEmail',
+        'id' => 'setId'
     ];
 
     /**
@@ -194,11 +179,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      * @var array<string, string>
      */
     protected static array $getters = [
-        'bcc' => 'getBcc',
-        'cc' => 'getCc',
-        'from' => 'getFrom',
-        'reply_to' => 'getReplyTo',
-        'to' => 'getTo'
+        'email' => 'getEmail',
+        'id' => 'getId'
     ];
 
     /**
@@ -248,11 +230,8 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('bcc', $data ?? [], null);
-        $this->setIfExists('cc', $data ?? [], null);
-        $this->setIfExists('from', $data ?? [], null);
-        $this->setIfExists('reply_to', $data ?? [], null);
-        $this->setIfExists('to', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -280,20 +259,11 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
     {
         $invalidProperties = [];
 
-        if ($this->container['bcc'] === null) {
-            $invalidProperties[] = "'bcc' can't be null";
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
         }
-        if ($this->container['cc'] === null) {
-            $invalidProperties[] = "'cc' can't be null";
-        }
-        if ($this->container['from'] === null && !$this->isNullableSetToNull('from')) {
-            $invalidProperties[] = "'from' is required";
-        }
-        if ($this->container['reply_to'] === null) {
-            $invalidProperties[] = "'reply_to' can't be null";
-        }
-        if ($this->container['to'] === null) {
-            $invalidProperties[] = "'to' can't be null";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
         }
         return $invalidProperties;
     }
@@ -308,143 +278,55 @@ class MailboxMessageContentParticipants implements ModelInterface, ArrayAccess, 
 
 
     /**
-     * Gets bcc
+     * Gets email
      *
-     * @return \Sendmux\Mailbox\Model\MailboxAddress[]
+     * @return string
      */
-    public function getBcc(): array
+    public function getEmail(): string
     {
-        return $this->container['bcc'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets bcc
+     * Sets email
      *
-     * @param \Sendmux\Mailbox\Model\MailboxAddress[] $bcc bcc
+     * @param string $email Mailbox email address
      *
      * @return $this
      */
-    public function setBcc(array $bcc): static
+    public function setEmail(string $email): static
     {
-        if (is_null($bcc)) {
-            throw new InvalidArgumentException('non-nullable bcc cannot be null');
+        if (is_null($email)) {
+            throw new InvalidArgumentException('non-nullable email cannot be null');
         }
-        $this->container['bcc'] = $bcc;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets cc
+     * Gets id
      *
-     * @return \Sendmux\Mailbox\Model\MailboxAddress[]
+     * @return string
      */
-    public function getCc(): array
+    public function getId(): string
     {
-        return $this->container['cc'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets cc
+     * Sets id
      *
-     * @param \Sendmux\Mailbox\Model\MailboxAddress[] $cc cc
+     * @param string $id Mailbox public ID
      *
      * @return $this
      */
-    public function setCc(array $cc): static
+    public function setId(string $id): static
     {
-        if (is_null($cc)) {
-            throw new InvalidArgumentException('non-nullable cc cannot be null');
+        if (is_null($id)) {
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['cc'] = $cc;
-
-        return $this;
-    }
-
-    /**
-     * Gets from
-     *
-     * @return \Sendmux\Mailbox\Model\MailboxAddress|null
-     */
-    public function getFrom(): ?\Sendmux\Mailbox\Model\MailboxAddress
-    {
-        return $this->container['from'];
-    }
-
-    /**
-     * Sets from
-     *
-     * @param \Sendmux\Mailbox\Model\MailboxAddress|null $from from
-     *
-     * @return $this
-     */
-    public function setFrom(?\Sendmux\Mailbox\Model\MailboxAddress $from): static
-    {
-        if (is_null($from)) {
-            array_push($this->openAPINullablesSetToNull, 'from');
-        } else {
-            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('from', $nullablesSetToNull);
-            if ($index !== false) {
-                unset($nullablesSetToNull[$index]);
-                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
-            }
-        }
-        $this->container['from'] = $from;
-
-        return $this;
-    }
-
-    /**
-     * Gets reply_to
-     *
-     * @return \Sendmux\Mailbox\Model\MailboxAddress[]
-     */
-    public function getReplyTo(): array
-    {
-        return $this->container['reply_to'];
-    }
-
-    /**
-     * Sets reply_to
-     *
-     * @param \Sendmux\Mailbox\Model\MailboxAddress[] $reply_to reply_to
-     *
-     * @return $this
-     */
-    public function setReplyTo(array $reply_to): static
-    {
-        if (is_null($reply_to)) {
-            throw new InvalidArgumentException('non-nullable reply_to cannot be null');
-        }
-        $this->container['reply_to'] = $reply_to;
-
-        return $this;
-    }
-
-    /**
-     * Gets to
-     *
-     * @return \Sendmux\Mailbox\Model\MailboxAddress[]
-     */
-    public function getTo(): array
-    {
-        return $this->container['to'];
-    }
-
-    /**
-     * Sets to
-     *
-     * @param \Sendmux\Mailbox\Model\MailboxAddress[] $to to
-     *
-     * @return $this
-     */
-    public function setTo(array $to): static
-    {
-        if (is_null($to)) {
-            throw new InvalidArgumentException('non-nullable to cannot be null');
-        }
-        $this->container['to'] = $to;
+        $this->container['id'] = $id;
 
         return $this;
     }
