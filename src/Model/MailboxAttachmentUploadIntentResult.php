@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BatchDeleteMailboxMessagesBody
+ * MailboxAttachmentUploadIntentResult
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Sendmux\Mailbox\ObjectSerializer;
 
 /**
- * BatchDeleteMailboxMessagesBody Class Doc Comment
+ * MailboxAttachmentUploadIntentResult Class Doc Comment
  *
  * @package  Sendmux\Mailbox
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, JsonSerializable
+class MailboxAttachmentUploadIntentResult implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'BatchDeleteMailboxMessagesBody';
+    protected static string $openAPIModelName = 'MailboxAttachmentUploadIntentResult';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'ids' => 'string[]',
-        'if_in_state' => 'string',
-        'permanent' => 'bool'
+        'expires_at' => '\DateTime',
+        'headers' => '\Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResultHeaders',
+        'max_size_bytes' => 'int',
+        'method' => 'string',
+        'upload_id' => 'string',
+        'upload_url' => 'string'
     ];
 
     /**
@@ -70,9 +73,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'ids' => null,
-        'if_in_state' => null,
-        'permanent' => null
+        'expires_at' => 'date-time',
+        'headers' => null,
+        'max_size_bytes' => null,
+        'method' => null,
+        'upload_id' => null,
+        'upload_url' => null
     ];
 
     /**
@@ -81,9 +87,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'ids' => false,
-        'if_in_state' => false,
-        'permanent' => false
+        'expires_at' => false,
+        'headers' => false,
+        'max_size_bytes' => false,
+        'method' => false,
+        'upload_id' => false,
+        'upload_url' => false
     ];
 
     /**
@@ -162,9 +171,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'ids' => 'ids',
-        'if_in_state' => 'if_in_state',
-        'permanent' => 'permanent'
+        'expires_at' => 'expires_at',
+        'headers' => 'headers',
+        'max_size_bytes' => 'max_size_bytes',
+        'method' => 'method',
+        'upload_id' => 'upload_id',
+        'upload_url' => 'upload_url'
     ];
 
     /**
@@ -173,9 +185,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $setters = [
-        'ids' => 'setIds',
-        'if_in_state' => 'setIfInState',
-        'permanent' => 'setPermanent'
+        'expires_at' => 'setExpiresAt',
+        'headers' => 'setHeaders',
+        'max_size_bytes' => 'setMaxSizeBytes',
+        'method' => 'setMethod',
+        'upload_id' => 'setUploadId',
+        'upload_url' => 'setUploadUrl'
     ];
 
     /**
@@ -184,9 +199,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $getters = [
-        'ids' => 'getIds',
-        'if_in_state' => 'getIfInState',
-        'permanent' => 'getPermanent'
+        'expires_at' => 'getExpiresAt',
+        'headers' => 'getHeaders',
+        'max_size_bytes' => 'getMaxSizeBytes',
+        'method' => 'getMethod',
+        'upload_id' => 'getUploadId',
+        'upload_url' => 'getUploadUrl'
     ];
 
     /**
@@ -221,6 +239,21 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
         return self::$openAPIModelName;
     }
 
+    public const METHOD_PUT = 'PUT';
+    public const METHOD_UNKNOWN_DEFAULT_OPEN_API = 'unknown_default_open_api';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public static function getMethodAllowableValues()
+    {
+        return [
+            self::METHOD_PUT,
+            self::METHOD_UNKNOWN_DEFAULT_OPEN_API,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -236,9 +269,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('ids', $data ?? [], null);
-        $this->setIfExists('if_in_state', $data ?? [], null);
-        $this->setIfExists('permanent', $data ?? [], null);
+        $this->setIfExists('expires_at', $data ?? [], null);
+        $this->setIfExists('headers', $data ?? [], null);
+        $this->setIfExists('max_size_bytes', $data ?? [], null);
+        $this->setIfExists('method', $data ?? [], null);
+        $this->setIfExists('upload_id', $data ?? [], null);
+        $this->setIfExists('upload_url', $data ?? [], null);
     }
 
     /**
@@ -266,17 +302,33 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['ids'] === null) {
-            $invalidProperties[] = "'ids' can't be null";
+        if ($this->container['expires_at'] === null) {
+            $invalidProperties[] = "'expires_at' can't be null";
         }
-        if ((count($this->container['ids']) > 100)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be less than or equal to 100.";
+        if ($this->container['headers'] === null) {
+            $invalidProperties[] = "'headers' can't be null";
+        }
+        if ($this->container['max_size_bytes'] === null) {
+            $invalidProperties[] = "'max_size_bytes' can't be null";
+        }
+        if ($this->container['method'] === null) {
+            $invalidProperties[] = "'method' can't be null";
+        }
+        $allowedValues = self::getMethodAllowableValues();
+        if (!is_null($this->container['method']) && !in_array($this->container['method'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'method', must be one of '%s'",
+                $this->container['method'],
+                implode("', '", $allowedValues)
+            );
         }
 
-        if ((count($this->container['ids']) < 1)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be greater than or equal to 1.";
+        if ($this->container['upload_id'] === null) {
+            $invalidProperties[] = "'upload_id' can't be null";
         }
-
+        if ($this->container['upload_url'] === null) {
+            $invalidProperties[] = "'upload_url' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,89 +342,167 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
 
 
     /**
-     * Gets ids
+     * Gets expires_at
      *
-     * @return string[]
+     * @return \DateTime
      */
-    public function getIds(): array
+    public function getExpiresAt(): \DateTime
     {
-        return $this->container['ids'];
+        return $this->container['expires_at'];
     }
 
     /**
-     * Sets ids
+     * Sets expires_at
      *
-     * @param string[] $ids Message IDs to delete, maximum 100.
+     * @param \DateTime $expires_at Upload URL expiry time.
      *
      * @return $this
      */
-    public function setIds(array $ids): static
+    public function setExpiresAt(\DateTime $expires_at): static
     {
-        if (is_null($ids)) {
-            throw new InvalidArgumentException('non-nullable ids cannot be null');
+        if (is_null($expires_at)) {
+            throw new InvalidArgumentException('non-nullable expires_at cannot be null');
         }
-
-        if ((count($ids) > 100)) {
-            throw new InvalidArgumentException('invalid value for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be less than or equal to 100.');
-        }
-        if ((count($ids) < 1)) {
-            throw new InvalidArgumentException('invalid length for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be greater than or equal to 1.');
-        }
-        $this->container['ids'] = $ids;
+        $this->container['expires_at'] = $expires_at;
 
         return $this;
     }
 
     /**
-     * Gets if_in_state
+     * Gets headers
      *
-     * @return string|null
+     * @return \Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResultHeaders
      */
-    public function getIfInState(): ?string
+    public function getHeaders(): \Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResultHeaders
     {
-        return $this->container['if_in_state'];
+        return $this->container['headers'];
     }
 
     /**
-     * Sets if_in_state
+     * Sets headers
      *
-     * @param string|null $if_in_state Optional message state token for stale-write protection.
+     * @param \Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResultHeaders $headers headers
      *
      * @return $this
      */
-    public function setIfInState(?string $if_in_state): static
+    public function setHeaders(\Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResultHeaders $headers): static
     {
-        if (is_null($if_in_state)) {
-            throw new InvalidArgumentException('non-nullable if_in_state cannot be null');
+        if (is_null($headers)) {
+            throw new InvalidArgumentException('non-nullable headers cannot be null');
         }
-        $this->container['if_in_state'] = $if_in_state;
+        $this->container['headers'] = $headers;
 
         return $this;
     }
 
     /**
-     * Gets permanent
+     * Gets max_size_bytes
      *
-     * @return bool|null
+     * @return int
      */
-    public function getPermanent(): ?bool
+    public function getMaxSizeBytes(): int
     {
-        return $this->container['permanent'];
+        return $this->container['max_size_bytes'];
     }
 
     /**
-     * Sets permanent
+     * Sets max_size_bytes
      *
-     * @param bool|null $permanent When true, permanently deletes instead of moving to Trash.
+     * @param int $max_size_bytes Maximum accepted attachment size in bytes.
      *
      * @return $this
      */
-    public function setPermanent(?bool $permanent): static
+    public function setMaxSizeBytes(int $max_size_bytes): static
     {
-        if (is_null($permanent)) {
-            throw new InvalidArgumentException('non-nullable permanent cannot be null');
+        if (is_null($max_size_bytes)) {
+            throw new InvalidArgumentException('non-nullable max_size_bytes cannot be null');
         }
-        $this->container['permanent'] = $permanent;
+        $this->container['max_size_bytes'] = $max_size_bytes;
+
+        return $this;
+    }
+
+    /**
+     * Gets method
+     *
+     * @return string
+     */
+    public function getMethod(): string
+    {
+        return $this->container['method'];
+    }
+
+    /**
+     * Sets method
+     *
+     * @param string $method HTTP method to use with `upload_url`.
+     *
+     * @return $this
+     */
+    public function setMethod(string $method): static
+    {
+        if (is_null($method)) {
+            throw new InvalidArgumentException('non-nullable method cannot be null');
+        }
+        $allowedValues = self::getMethodAllowableValues();
+        if (!in_array($method, $allowedValues, true)) {
+            $method = self::METHOD_UNKNOWN_DEFAULT_OPEN_API;
+        }
+        $this->container['method'] = $method;
+
+        return $this;
+    }
+
+    /**
+     * Gets upload_id
+     *
+     * @return string
+     */
+    public function getUploadId(): string
+    {
+        return $this->container['upload_id'];
+    }
+
+    /**
+     * Sets upload_id
+     *
+     * @param string $upload_id Short-lived upload intent ID.
+     *
+     * @return $this
+     */
+    public function setUploadId(string $upload_id): static
+    {
+        if (is_null($upload_id)) {
+            throw new InvalidArgumentException('non-nullable upload_id cannot be null');
+        }
+        $this->container['upload_id'] = $upload_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets upload_url
+     *
+     * @return string
+     */
+    public function getUploadUrl(): string
+    {
+        return $this->container['upload_url'];
+    }
+
+    /**
+     * Sets upload_url
+     *
+     * @param string $upload_url Short-lived signed PUT URL for this exact attachment. Upload promptly; if it expires, create a new upload URL.
+     *
+     * @return $this
+     */
+    public function setUploadUrl(string $upload_url): static
+    {
+        if (is_null($upload_url)) {
+            throw new InvalidArgumentException('non-nullable upload_url cannot be null');
+        }
+        $this->container['upload_url'] = $upload_url;
 
         return $this;
     }

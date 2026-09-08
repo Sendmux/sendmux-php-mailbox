@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BatchDeleteMailboxMessagesBody
+ * MailboxAttachmentUploadIntentResultResponse
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Sendmux\Mailbox\ObjectSerializer;
 
 /**
- * BatchDeleteMailboxMessagesBody Class Doc Comment
+ * MailboxAttachmentUploadIntentResultResponse Class Doc Comment
  *
  * @package  Sendmux\Mailbox
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, JsonSerializable
+class MailboxAttachmentUploadIntentResultResponse implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'BatchDeleteMailboxMessagesBody';
+    protected static string $openAPIModelName = 'MailboxAttachmentUploadIntentResultResponse';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'ids' => 'string[]',
-        'if_in_state' => 'string',
-        'permanent' => 'bool'
+        'meta' => '\Sendmux\Mailbox\Model\ResponseMeta',
+        'ok' => 'bool',
+        'data' => '\Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResult'
     ];
 
     /**
@@ -70,9 +70,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'ids' => null,
-        'if_in_state' => null,
-        'permanent' => null
+        'meta' => null,
+        'ok' => null,
+        'data' => null
     ];
 
     /**
@@ -81,9 +81,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'ids' => false,
-        'if_in_state' => false,
-        'permanent' => false
+        'meta' => false,
+        'ok' => false,
+        'data' => false
     ];
 
     /**
@@ -162,9 +162,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'ids' => 'ids',
-        'if_in_state' => 'if_in_state',
-        'permanent' => 'permanent'
+        'meta' => 'meta',
+        'ok' => 'ok',
+        'data' => 'data'
     ];
 
     /**
@@ -173,9 +173,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $setters = [
-        'ids' => 'setIds',
-        'if_in_state' => 'setIfInState',
-        'permanent' => 'setPermanent'
+        'meta' => 'setMeta',
+        'ok' => 'setOk',
+        'data' => 'setData'
     ];
 
     /**
@@ -184,9 +184,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $getters = [
-        'ids' => 'getIds',
-        'if_in_state' => 'getIfInState',
-        'permanent' => 'getPermanent'
+        'meta' => 'getMeta',
+        'ok' => 'getOk',
+        'data' => 'getData'
     ];
 
     /**
@@ -236,9 +236,9 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('ids', $data ?? [], null);
-        $this->setIfExists('if_in_state', $data ?? [], null);
-        $this->setIfExists('permanent', $data ?? [], null);
+        $this->setIfExists('meta', $data ?? [], null);
+        $this->setIfExists('ok', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
     }
 
     /**
@@ -266,17 +266,15 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['ids'] === null) {
-            $invalidProperties[] = "'ids' can't be null";
+        if ($this->container['meta'] === null) {
+            $invalidProperties[] = "'meta' can't be null";
         }
-        if ((count($this->container['ids']) > 100)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be less than or equal to 100.";
+        if ($this->container['ok'] === null) {
+            $invalidProperties[] = "'ok' can't be null";
         }
-
-        if ((count($this->container['ids']) < 1)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be greater than or equal to 1.";
+        if ($this->container['data'] === null) {
+            $invalidProperties[] = "'data' can't be null";
         }
-
         return $invalidProperties;
     }
 
@@ -290,89 +288,82 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
 
 
     /**
-     * Gets ids
+     * Gets meta
      *
-     * @return string[]
+     * @return \Sendmux\Mailbox\Model\ResponseMeta
      */
-    public function getIds(): array
+    public function getMeta(): \Sendmux\Mailbox\Model\ResponseMeta
     {
-        return $this->container['ids'];
+        return $this->container['meta'];
     }
 
     /**
-     * Sets ids
+     * Sets meta
      *
-     * @param string[] $ids Message IDs to delete, maximum 100.
+     * @param \Sendmux\Mailbox\Model\ResponseMeta $meta meta
      *
      * @return $this
      */
-    public function setIds(array $ids): static
+    public function setMeta(\Sendmux\Mailbox\Model\ResponseMeta $meta): static
     {
-        if (is_null($ids)) {
-            throw new InvalidArgumentException('non-nullable ids cannot be null');
+        if (is_null($meta)) {
+            throw new InvalidArgumentException('non-nullable meta cannot be null');
         }
-
-        if ((count($ids) > 100)) {
-            throw new InvalidArgumentException('invalid value for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be less than or equal to 100.');
-        }
-        if ((count($ids) < 1)) {
-            throw new InvalidArgumentException('invalid length for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be greater than or equal to 1.');
-        }
-        $this->container['ids'] = $ids;
+        $this->container['meta'] = $meta;
 
         return $this;
     }
 
     /**
-     * Gets if_in_state
+     * Gets ok
      *
-     * @return string|null
+     * @return bool
      */
-    public function getIfInState(): ?string
+    public function getOk(): bool
     {
-        return $this->container['if_in_state'];
+        return $this->container['ok'];
     }
 
     /**
-     * Sets if_in_state
+     * Sets ok
      *
-     * @param string|null $if_in_state Optional message state token for stale-write protection.
+     * @param bool $ok ok
      *
      * @return $this
      */
-    public function setIfInState(?string $if_in_state): static
+    public function setOk(bool $ok): static
     {
-        if (is_null($if_in_state)) {
-            throw new InvalidArgumentException('non-nullable if_in_state cannot be null');
+        if (is_null($ok)) {
+            throw new InvalidArgumentException('non-nullable ok cannot be null');
         }
-        $this->container['if_in_state'] = $if_in_state;
+        $this->container['ok'] = $ok;
 
         return $this;
     }
 
     /**
-     * Gets permanent
+     * Gets data
      *
-     * @return bool|null
+     * @return \Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResult
      */
-    public function getPermanent(): ?bool
+    public function getData(): \Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResult
     {
-        return $this->container['permanent'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets permanent
+     * Sets data
      *
-     * @param bool|null $permanent When true, permanently deletes instead of moving to Trash.
+     * @param \Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResult $data data
      *
      * @return $this
      */
-    public function setPermanent(?bool $permanent): static
+    public function setData(\Sendmux\Mailbox\Model\MailboxAttachmentUploadIntentResult $data): static
     {
-        if (is_null($permanent)) {
-            throw new InvalidArgumentException('non-nullable permanent cannot be null');
+        if (is_null($data)) {
+            throw new InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['permanent'] = $permanent;
+        $this->container['data'] = $data;
 
         return $this;
     }

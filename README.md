@@ -12,17 +12,17 @@ Read the PHP SDK guide at [sendmux.ai/docs/sdks/php](https://sendmux.ai/docs/sdk
 
 - PHP 8.2 or newer.
 - Composer.
-- A mailbox-scoped API key with the `smx_mbx_` prefix.
+- A mailbox-scoped `smx_mbx_` key or scoped `smx_agent_` token.
 
 ## Installation
 
 ```bash
-composer require sendmux/mailbox:^1.0
+composer require sendmux/mailbox:^1.1
 ```
 
 ## Usage
 
-Create the Mailbox API client with a mailbox-scoped key.
+Create the Mailbox API client with a mailbox-scoped key or scoped agent token.
 
 ```php
 <?php
@@ -36,11 +36,21 @@ $mailboxApi = ClientFactory::createMailboxAPIApi(
 );
 ```
 
+Use `$mailboxApi->mailboxGetConnection()` to test credentials without selecting a target mailbox.
+
 The generated `MailboxAPIApi` exposes mailbox methods such as `mailboxGetMe()`, `mailboxListMessages()`, `mailboxSendMessage()`, and `mailboxUploadAttachment()`.
+
+## Attachments and events
+
+Message and event attachment metadata includes `download_url`, a short-lived presigned URL for that single attachment. Fetch it promptly with a plain HTTP client and no `Authorization` header. If it expires, re-fetch the message or attachment metadata to receive a fresh URL.
+
+Use `mailboxUploadAttachment()` to upload bytes and pass the returned `blob_id` into `mailboxSendMessage()` attachments. Inline base64 attachments remain available in the generated send body shape for small payloads.
+
+`mailboxStreamEvents()` exposes the Mailbox SSE endpoint for clients that want live `message.received` events.
 
 ## Features
 
-- Validates `smx_mbx_` API keys before configuring the client.
+- Validates `smx_mbx_` keys or scoped `smx_agent_` tokens before configuring the client.
 - Uses `https://app.sendmux.ai/api/v1` by default.
 - Adds retry and rate-limit backoff behaviour through `sendmux/core`.
 - Covers mailbox identity, folders, messages, attachments, submissions, threads, quota, usage, and event streams.

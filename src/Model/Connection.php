@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BatchDeleteMailboxMessagesBody
+ * Connection
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Sendmux\Mailbox\ObjectSerializer;
 
 /**
- * BatchDeleteMailboxMessagesBody Class Doc Comment
+ * Connection Class Doc Comment
  *
  * @package  Sendmux\Mailbox
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, JsonSerializable
+class Connection implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'BatchDeleteMailboxMessagesBody';
+    protected static string $openAPIModelName = 'Connection';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'ids' => 'string[]',
-        'if_in_state' => 'string',
-        'permanent' => 'bool'
+        'credential' => '\Sendmux\Mailbox\Model\ConnectionCredential',
+        'label' => 'string',
+        'mailboxes' => '\Sendmux\Mailbox\Model\ConnectionMailboxesInner[]',
+        'permissions' => 'string[]',
+        'team' => '\Sendmux\Mailbox\Model\ConnectionTeam'
     ];
 
     /**
@@ -70,9 +72,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'ids' => null,
-        'if_in_state' => null,
-        'permanent' => null
+        'credential' => null,
+        'label' => null,
+        'mailboxes' => null,
+        'permissions' => null,
+        'team' => null
     ];
 
     /**
@@ -81,9 +85,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'ids' => false,
-        'if_in_state' => false,
-        'permanent' => false
+        'credential' => false,
+        'label' => false,
+        'mailboxes' => false,
+        'permissions' => false,
+        'team' => false
     ];
 
     /**
@@ -162,9 +168,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'ids' => 'ids',
-        'if_in_state' => 'if_in_state',
-        'permanent' => 'permanent'
+        'credential' => 'credential',
+        'label' => 'label',
+        'mailboxes' => 'mailboxes',
+        'permissions' => 'permissions',
+        'team' => 'team'
     ];
 
     /**
@@ -173,9 +181,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $setters = [
-        'ids' => 'setIds',
-        'if_in_state' => 'setIfInState',
-        'permanent' => 'setPermanent'
+        'credential' => 'setCredential',
+        'label' => 'setLabel',
+        'mailboxes' => 'setMailboxes',
+        'permissions' => 'setPermissions',
+        'team' => 'setTeam'
     ];
 
     /**
@@ -184,9 +194,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $getters = [
-        'ids' => 'getIds',
-        'if_in_state' => 'getIfInState',
-        'permanent' => 'getPermanent'
+        'credential' => 'getCredential',
+        'label' => 'getLabel',
+        'mailboxes' => 'getMailboxes',
+        'permissions' => 'getPermissions',
+        'team' => 'getTeam'
     ];
 
     /**
@@ -236,9 +248,11 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('ids', $data ?? [], null);
-        $this->setIfExists('if_in_state', $data ?? [], null);
-        $this->setIfExists('permanent', $data ?? [], null);
+        $this->setIfExists('credential', $data ?? [], null);
+        $this->setIfExists('label', $data ?? [], null);
+        $this->setIfExists('mailboxes', $data ?? [], null);
+        $this->setIfExists('permissions', $data ?? [], null);
+        $this->setIfExists('team', $data ?? [], null);
     }
 
     /**
@@ -266,17 +280,21 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['ids'] === null) {
-            $invalidProperties[] = "'ids' can't be null";
+        if ($this->container['credential'] === null) {
+            $invalidProperties[] = "'credential' can't be null";
         }
-        if ((count($this->container['ids']) > 100)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be less than or equal to 100.";
+        if ($this->container['label'] === null) {
+            $invalidProperties[] = "'label' can't be null";
         }
-
-        if ((count($this->container['ids']) < 1)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be greater than or equal to 1.";
+        if ($this->container['mailboxes'] === null) {
+            $invalidProperties[] = "'mailboxes' can't be null";
         }
-
+        if ($this->container['permissions'] === null) {
+            $invalidProperties[] = "'permissions' can't be null";
+        }
+        if ($this->container['team'] === null) {
+            $invalidProperties[] = "'team' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -290,89 +308,136 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
 
 
     /**
-     * Gets ids
+     * Gets credential
+     *
+     * @return \Sendmux\Mailbox\Model\ConnectionCredential
+     */
+    public function getCredential(): \Sendmux\Mailbox\Model\ConnectionCredential
+    {
+        return $this->container['credential'];
+    }
+
+    /**
+     * Sets credential
+     *
+     * @param \Sendmux\Mailbox\Model\ConnectionCredential $credential credential
+     *
+     * @return $this
+     */
+    public function setCredential(\Sendmux\Mailbox\Model\ConnectionCredential $credential): static
+    {
+        if (is_null($credential)) {
+            throw new InvalidArgumentException('non-nullable credential cannot be null');
+        }
+        $this->container['credential'] = $credential;
+
+        return $this;
+    }
+
+    /**
+     * Gets label
+     *
+     * @return string
+     */
+    public function getLabel(): string
+    {
+        return $this->container['label'];
+    }
+
+    /**
+     * Sets label
+     *
+     * @param string $label Display label for this connection.
+     *
+     * @return $this
+     */
+    public function setLabel(string $label): static
+    {
+        if (is_null($label)) {
+            throw new InvalidArgumentException('non-nullable label cannot be null');
+        }
+        $this->container['label'] = $label;
+
+        return $this;
+    }
+
+    /**
+     * Gets mailboxes
+     *
+     * @return \Sendmux\Mailbox\Model\ConnectionMailboxesInner[]
+     */
+    public function getMailboxes(): array
+    {
+        return $this->container['mailboxes'];
+    }
+
+    /**
+     * Sets mailboxes
+     *
+     * @param \Sendmux\Mailbox\Model\ConnectionMailboxesInner[] $mailboxes mailboxes
+     *
+     * @return $this
+     */
+    public function setMailboxes(array $mailboxes): static
+    {
+        if (is_null($mailboxes)) {
+            throw new InvalidArgumentException('non-nullable mailboxes cannot be null');
+        }
+        $this->container['mailboxes'] = $mailboxes;
+
+        return $this;
+    }
+
+    /**
+     * Gets permissions
      *
      * @return string[]
      */
-    public function getIds(): array
+    public function getPermissions(): array
     {
-        return $this->container['ids'];
+        return $this->container['permissions'];
     }
 
     /**
-     * Sets ids
+     * Sets permissions
      *
-     * @param string[] $ids Message IDs to delete, maximum 100.
+     * @param string[] $permissions permissions
      *
      * @return $this
      */
-    public function setIds(array $ids): static
+    public function setPermissions(array $permissions): static
     {
-        if (is_null($ids)) {
-            throw new InvalidArgumentException('non-nullable ids cannot be null');
+        if (is_null($permissions)) {
+            throw new InvalidArgumentException('non-nullable permissions cannot be null');
         }
-
-        if ((count($ids) > 100)) {
-            throw new InvalidArgumentException('invalid value for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be less than or equal to 100.');
-        }
-        if ((count($ids) < 1)) {
-            throw new InvalidArgumentException('invalid length for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be greater than or equal to 1.');
-        }
-        $this->container['ids'] = $ids;
+        $this->container['permissions'] = $permissions;
 
         return $this;
     }
 
     /**
-     * Gets if_in_state
+     * Gets team
      *
-     * @return string|null
+     * @return \Sendmux\Mailbox\Model\ConnectionTeam
      */
-    public function getIfInState(): ?string
+    public function getTeam(): \Sendmux\Mailbox\Model\ConnectionTeam
     {
-        return $this->container['if_in_state'];
+        return $this->container['team'];
     }
 
     /**
-     * Sets if_in_state
+     * Sets team
      *
-     * @param string|null $if_in_state Optional message state token for stale-write protection.
+     * @param \Sendmux\Mailbox\Model\ConnectionTeam $team team
      *
      * @return $this
      */
-    public function setIfInState(?string $if_in_state): static
+    public function setTeam(\Sendmux\Mailbox\Model\ConnectionTeam $team): static
     {
-        if (is_null($if_in_state)) {
-            throw new InvalidArgumentException('non-nullable if_in_state cannot be null');
+        if (is_null($team)) {
+            throw new InvalidArgumentException('non-nullable team cannot be null');
         }
-        $this->container['if_in_state'] = $if_in_state;
-
-        return $this;
-    }
-
-    /**
-     * Gets permanent
-     *
-     * @return bool|null
-     */
-    public function getPermanent(): ?bool
-    {
-        return $this->container['permanent'];
-    }
-
-    /**
-     * Sets permanent
-     *
-     * @param bool|null $permanent When true, permanently deletes instead of moving to Trash.
-     *
-     * @return $this
-     */
-    public function setPermanent(?bool $permanent): static
-    {
-        if (is_null($permanent)) {
-            throw new InvalidArgumentException('non-nullable permanent cannot be null');
-        }
-        $this->container['permanent'] = $permanent;
+        $this->container['team'] = $team;
 
         return $this;
     }
