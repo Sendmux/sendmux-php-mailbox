@@ -283,11 +283,11 @@ class BatchUpdateMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
         if ($this->container['ids'] === null) {
             $invalidProperties[] = "'ids' can't be null";
         }
-        if ((count($this->container['ids']) > 100)) {
+        if (!is_null($this->container['ids']) && (count($this->container['ids']) > 100)) {
             $invalidProperties[] = "invalid value for 'ids', number of items must be less than or equal to 100.";
         }
 
-        if ((count($this->container['ids']) < 1)) {
+        if (!is_null($this->container['ids']) && (count($this->container['ids']) < 1)) {
             $invalidProperties[] = "invalid value for 'ids', number of items must be greater than or equal to 1.";
         }
 
@@ -316,7 +316,7 @@ class BatchUpdateMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     /**
      * Sets flagged
      *
-     * @param bool|null $flagged flagged
+     * @param bool|null $flagged Set or clear the flagged marker.
      *
      * @return $this
      */
@@ -343,7 +343,7 @@ class BatchUpdateMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     /**
      * Sets ids
      *
-     * @param string[] $ids ids
+     * @param string[] $ids Message IDs to update, maximum 100.
      *
      * @return $this
      */
@@ -431,7 +431,7 @@ class BatchUpdateMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     /**
      * Sets seen
      *
-     * @param bool|null $seen seen
+     * @param bool|null $seen Set or clear the seen flag.
      *
      * @return $this
      */

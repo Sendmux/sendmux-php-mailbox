@@ -1,7 +1,7 @@
 <?php
 
 /**
- * BatchDeleteMailboxMessagesBody
+ * ConnectionMailboxesInner
  *
  * PHP version 8.1
  *
@@ -35,14 +35,14 @@ use ReturnTypeWillChange;
 use Sendmux\Mailbox\ObjectSerializer;
 
 /**
- * BatchDeleteMailboxMessagesBody Class Doc Comment
+ * ConnectionMailboxesInner Class Doc Comment
  *
  * @package  Sendmux\Mailbox
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements ArrayAccess<string, mixed>
  */
-class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, JsonSerializable
+class ConnectionMailboxesInner implements ModelInterface, ArrayAccess, JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      *
      * @var string
      */
-    protected static string $openAPIModelName = 'BatchDeleteMailboxMessagesBody';
+    protected static string $openAPIModelName = 'Connection_mailboxes_inner';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $openAPITypes = [
-        'ids' => 'string[]',
-        'if_in_state' => 'string',
-        'permanent' => 'bool'
+        'email' => 'string',
+        'id' => 'string'
     ];
 
     /**
@@ -70,9 +69,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string|null>
      */
     protected static array $openAPIFormats = [
-        'ids' => null,
-        'if_in_state' => null,
-        'permanent' => null
+        'email' => 'email',
+        'id' => null
     ];
 
     /**
@@ -81,9 +79,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, bool>
      */
     protected static array $openAPINullables = [
-        'ids' => false,
-        'if_in_state' => false,
-        'permanent' => false
+        'email' => false,
+        'id' => false
     ];
 
     /**
@@ -162,9 +159,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $attributeMap = [
-        'ids' => 'ids',
-        'if_in_state' => 'if_in_state',
-        'permanent' => 'permanent'
+        'email' => 'email',
+        'id' => 'id'
     ];
 
     /**
@@ -173,9 +169,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $setters = [
-        'ids' => 'setIds',
-        'if_in_state' => 'setIfInState',
-        'permanent' => 'setPermanent'
+        'email' => 'setEmail',
+        'id' => 'setId'
     ];
 
     /**
@@ -184,9 +179,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      * @var array<string, string>
      */
     protected static array $getters = [
-        'ids' => 'getIds',
-        'if_in_state' => 'getIfInState',
-        'permanent' => 'getPermanent'
+        'email' => 'getEmail',
+        'id' => 'getId'
     ];
 
     /**
@@ -236,9 +230,8 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('ids', $data ?? [], null);
-        $this->setIfExists('if_in_state', $data ?? [], null);
-        $this->setIfExists('permanent', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
     }
 
     /**
@@ -266,17 +259,12 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
     {
         $invalidProperties = [];
 
-        if ($this->container['ids'] === null) {
-            $invalidProperties[] = "'ids' can't be null";
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
         }
-        if (!is_null($this->container['ids']) && (count($this->container['ids']) > 100)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be less than or equal to 100.";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
         }
-
-        if (!is_null($this->container['ids']) && (count($this->container['ids']) < 1)) {
-            $invalidProperties[] = "invalid value for 'ids', number of items must be greater than or equal to 1.";
-        }
-
         return $invalidProperties;
     }
 
@@ -290,89 +278,55 @@ class BatchDeleteMailboxMessagesBody implements ModelInterface, ArrayAccess, Jso
 
 
     /**
-     * Gets ids
+     * Gets email
      *
-     * @return string[]
+     * @return string
      */
-    public function getIds(): array
+    public function getEmail(): string
     {
-        return $this->container['ids'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets ids
+     * Sets email
      *
-     * @param string[] $ids Message IDs to delete, maximum 100.
+     * @param string $email email
      *
      * @return $this
      */
-    public function setIds(array $ids): static
+    public function setEmail(string $email): static
     {
-        if (is_null($ids)) {
-            throw new InvalidArgumentException('non-nullable ids cannot be null');
+        if (is_null($email)) {
+            throw new InvalidArgumentException('non-nullable email cannot be null');
         }
-
-        if ((count($ids) > 100)) {
-            throw new InvalidArgumentException('invalid value for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be less than or equal to 100.');
-        }
-        if ((count($ids) < 1)) {
-            throw new InvalidArgumentException('invalid length for $ids when calling BatchDeleteMailboxMessagesBody., number of items must be greater than or equal to 1.');
-        }
-        $this->container['ids'] = $ids;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets if_in_state
+     * Gets id
      *
-     * @return string|null
+     * @return string
      */
-    public function getIfInState(): ?string
+    public function getId(): string
     {
-        return $this->container['if_in_state'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets if_in_state
+     * Sets id
      *
-     * @param string|null $if_in_state Optional message state token for stale-write protection.
+     * @param string $id id
      *
      * @return $this
      */
-    public function setIfInState(?string $if_in_state): static
+    public function setId(string $id): static
     {
-        if (is_null($if_in_state)) {
-            throw new InvalidArgumentException('non-nullable if_in_state cannot be null');
+        if (is_null($id)) {
+            throw new InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['if_in_state'] = $if_in_state;
-
-        return $this;
-    }
-
-    /**
-     * Gets permanent
-     *
-     * @return bool|null
-     */
-    public function getPermanent(): ?bool
-    {
-        return $this->container['permanent'];
-    }
-
-    /**
-     * Sets permanent
-     *
-     * @param bool|null $permanent When true, permanently deletes instead of moving to Trash.
-     *
-     * @return $this
-     */
-    public function setPermanent(?bool $permanent): static
-    {
-        if (is_null($permanent)) {
-            throw new InvalidArgumentException('non-nullable permanent cannot be null');
-        }
-        $this->container['permanent'] = $permanent;
+        $this->container['id'] = $id;
 
         return $this;
     }
