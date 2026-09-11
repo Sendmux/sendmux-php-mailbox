@@ -12,12 +12,12 @@ Read the PHP SDK guide at [sendmux.ai/docs/sdks/php](https://sendmux.ai/docs/sdk
 
 - PHP 8.2 or newer.
 - Composer.
-- A mailbox-scoped `smx_mbx_` key or scoped `smx_agent_` token.
+- A mailbox-scoped `smx_mbx_` key or scoped `smx_agent_` token. Alternatively, use a REST OAuth access token with the required scopes.
 
 ## Installation
 
 ```bash
-composer require sendmux/mailbox:^2.0
+composer require sendmux/mailbox:^2.1
 ```
 
 Upgrading from 1.x? Read the [PHP 2.0 migration guide](https://github.com/Sendmux/sendmux-sdk/blob/main/packages/php/UPGRADING.md) before changing your Composer constraint.
@@ -49,6 +49,18 @@ Message and event attachment metadata includes `download_url`, a short-lived pre
 Use `mailboxUploadAttachment()` to upload bytes and pass the returned `blob_id` into `mailboxSendMessage()` attachments. Inline base64 attachments remain available in the generated send body shape for small payloads.
 
 `mailboxStreamEvents()` exposes the Mailbox SSE endpoint for clients that want live `message.received` events.
+
+## OAuth access tokens
+
+`ClientFactory::createMailboxAPIApiWithAccessToken($accessToken)` accepts a bare token or a callable returning one. Every API group factory has the same `WithAccessToken` variant. Providers run on each request and retry; your application owns token storage and refresh coordination. OAuth clients do not follow redirects.
+
+```php
+$client = ClientFactory::createMailboxAPIApiWithAccessToken(
+    static fn (): string => getenv('SENDMUX_ACCESS_TOKEN') ?: ''
+);
+```
+
+See [OAuth setup and lifecycle](https://sendmux.ai/docs/developer-tools/oauth).
 
 ## Features
 
