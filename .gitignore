@@ -1,0 +1,7 @@
+
+# Claude agent workspace — local only. No trailing slash on sessions/artifacts:
+# a trailing slash matches a directory but not the worktree symlink, which makes
+# 'git worktree remove' refuse. See AA-AI/CLAUDE-CODE-RULES.md.
+.claude/sessions
+.claude/artifacts
+.claude/.housekeeping
